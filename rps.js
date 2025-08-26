@@ -1,45 +1,9 @@
-// function computer_choice(){
-//     let num =Math.random() ;
-//     let choice ='';
-//     let inpt_s =prompt(`Rock, Paper or Scissors?`);
-//     inpt_s =inpt_s.toUpperCase(inpt_s) ;
-//     console.log(inpt_s);
-
-//     if (!(inpt_s ==="ROCK" ||inpt_s === "PAPER" ||inpt_s === "SCISSORS")){
-//         console.log("neither rock,paper, or scissors");
-
-//     }
-//     switch (true){ //rock
-        
-//         case num<=0.33:
-//          choice =`Rock`;
-//          choice =choice.toUpperCase;                //paper beat rock, rock beats scissors, scissors beats paper, repeat
-//             if (inpt_s ==`PAPER`){
-//                 console.log(`CONGRATS, YOU WON agains't ${choice}`);   
-//             } else console.log (`You lost sorry the answer was ${choice}`);
-//         break;
-
-//         case num>=0.34 && num<=0.66:
-//          choice =`Scissors` ;//scissors
-//          choice =choice.toUpperCase;
-//           if (inpt_s ==`ROCK`){
-//                 console.log(`CONGRATS, YOU WON agains't ${choice}`);   
-//             } else console.log(`You lost sorry the answer was ${choice}`);
-//             break;
-        
-//         case num>=0.67:
-//          choice =`Paper`; //paper
-//          choice =choice.toUpperCase;
-//           if (inpt_s ==`SCISSORS`){
-//                 console.log(`CONGRATS, YOU WON agains't ${choice}`);   
-//             } else console.log(`You lost sorry the answer was ${choice}`);
-//             break ;
-//  console.log(num);
-//     }
-//}
+let h_score =0;
+let c_score =0;
+let rnum ;
 function c_choice(){
-    let rnum =Math.random();
-    if (rnum >=0 && rnum<0.33){ //rock
+    rnum =Math.random();
+    if (rnum<=0.33){ //rock
         return `ROCK`;
     }else if (rnum >=0.34 && rnum <0.66){
         return `PAPER`;
@@ -48,12 +12,55 @@ function c_choice(){
     }
 }
 
+
 function h_choice(){
     let choice =prompt(`Rock, Paper or Scissors?`);
     choice = choice.toUpperCase(choice);
-    if (!(choice ==`ROCK` || choice== `PAPER` || choice==`SCISSORS`)){
+    if (!(choice ==`ROCK` || choice== `PAPER` || choice==`SCISSORS` ||null ||undefined)){
         return `Not a valid input!`;
     } else { 
         return choice ;}
 }
 
+function playRound(h_choice,c_choice){
+    if (h_choice ===c_choice){
+        return `Draw Oh No` ;
+    } if(h_choice ===`ROCK` && c_choice ===`SCISSORS`){ ///rock
+        h_score++; 
+        return `You win.`;
+    } else if(h_choice ===`ROCK` && c_choice ===`PAPER`){
+        c_score++;
+        return `You lost.`;
+    }
+
+    if(h_choice ===`PAPER` && c_choice ===`ROCK`){ //paper
+        h_score++;
+        return `You win.`;
+    } else if(h_choice ===`PAPER` && c_choice ===`SCISSORS`){
+        c_score++;
+        return `You lost.`;
+    }
+
+     if(h_choice ===`SCISSORS` && c_choice ===`PAPER`){ //scissors
+        h_score++;
+        return `You win.`;
+    } else if(h_choice ===`SCISSORS` && c_choice ===`ROCK`){
+        c_score++;
+        return `You lost.`;
+    }
+}
+function playGame(){
+     let num_times =parseInt(prompt(`How many times do you want to play?`));
+    for (let i =1; i <=num_times; i ++){
+        
+        prompt(`${playRound(h_choice(),c_choice())} score human: ${h_score}, bot: ${c_score}`);
+    }
+    if (h_score >c_score){
+        prompt(`Human won, GG.`);
+    } else{
+        prompt(`Sorry lil bro, I won ~Bot`);
+    }
+    h_score =0;
+    c_score =0;
+}
+playGame();
