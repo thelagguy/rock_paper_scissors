@@ -47,6 +47,13 @@ function c_choice(){
         return `SCISSORS`;
     }
 }
-for (let i =1;i <100;i ++){
-    console.log(c_choice());
+
+function h_choice(){
+    let choice =prompt(`Rock, Paper or Scissors?`);
+    choice = choice.toUpperCase(choice);
+    if (!(choice ==`ROCK` || choice== `PAPER` || choice==`SCISSORS`)){
+        return `Not a valid input!`;
+    } else { 
+        return choice ;}
 }
+
